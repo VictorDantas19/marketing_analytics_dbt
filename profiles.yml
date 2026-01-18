@@ -1,0 +1,14 @@
+marketing_analytics_dbt:
+  outputs:
+    dev:
+      dataset: marketing_analytics
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: US
+      method: service-account
+      priority: interactive
+      project: fifth-handbook-484619-q9
+      threads: 2
+      type: bigquery
+      keyfile: C:/projetos_dbt/keys/fifth-handbook-484619-q9-fbb81bdbc4cf.json
+  target: dev

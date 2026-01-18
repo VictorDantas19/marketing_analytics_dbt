@@ -1,0 +1,13 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "name": "BigQuery",
+            "authenticator": "SERVICE_ACCOUNT",
+            "location": "us",
+            "previewLimit": 50,
+            "driver": "BigQuery",
+            "keyfile": "C:/projetos_dbt/keys/fifth-handbook-484619-q9-fbb81bdbc4cf.json"
+        }
+    ]
+}
