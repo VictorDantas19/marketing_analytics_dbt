@@ -1,0 +1,91 @@
+version: 2
+
+sources:
+  - name: marketing_raw
+    description: >
+      Raw marketing and e-commerce data ingested from Kaggle datasets.
+      Data is stored as-is, without transformations, to preserve source fidelity.
+    database: fifth-handbook-484619-q9
+    schema: marketing_raw
+    tables:
+      - name: campaigns_raw
+        description: >
+          One row per marketing campaign.
+          Contains campaign metadata such as objective, channel, start and end dates.
+
+        columns:
+          - name: campaign_id
+            description: Unique identifier for the campaign
+            tests:
+              - not_null
+              - unique
+
+      - name: customers_raw
+        description: >
+          One row per customer.
+          Contains demographic information, acquisition channel and loyalty classification.
+
+        columns:
+          - name: customer_id
+            description: Unique identifier for the customer
+            tests:
+              - not_null
+              - unique
+
+      - name: events_raw
+        description: >
+          One row per user event.
+          Represents interactions performed by users at a specific timestamp.
+
+        columns:
+          - name: event_id
+            description: Unique identifier for the event
+            tests:
+              - not_null
+              - unique
+
+          - name: event_timestamp
+            description: Exact timestamp when the event occurred
+            tests:
+              - not_null
+
+          - name: customer_id
+            description: Customer associated with the event
+
+          - name: event_type
+            description: Type of event performed by the user (e.g. view, click, add_to_cart)
+
+      - name: products_raw
+        description: >
+          One row per product.
+          Contains product attributes such as category, base price and premium flag.
+
+        columns:
+          - name: product_id
+            description: Unique identifier for the product
+            tests:
+              - not_null
+              - unique
+
+      - name: transactions_raw
+        description: >
+          One row per transaction (sale).
+          Contains transactional data including revenue, discounts and refund flag.
+
+        columns:
+          - name: transaction_id
+            description: Unique identifier for the transaction
+            tests:
+              - not_null
+              - unique
+
+          - name: customer_id
+            description: Customer who performed the transaction
+
+          - name: product_id
+            description: Product sold in the transaction
+
+          - name: transaction_timestamp
+            description: Exact timestamp when the transaction occurred
+            tests:
+              - not_null
