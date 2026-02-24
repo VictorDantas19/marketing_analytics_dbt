@@ -51,9 +51,10 @@ sources:
 
           - name: customer_id
             description: Customer associated with the event
-
-          - name: event_type
-            description: Type of event performed by the user (e.g. view, click, add_to_cart)
+            tests:
+              - relationships:
+                to: source('marketing_raw', 'customers_raw')
+                field: customer_id
 
       - name: products_raw
         description: >
@@ -81,6 +82,10 @@ sources:
 
           - name: customer_id
             description: Customer who performed the transaction
+            tests:
+              - relationships:
+                to: source('marketing_raw', 'customers_raw')
+                field: customer_id
 
           - name: product_id
             description: Product sold in the transaction
