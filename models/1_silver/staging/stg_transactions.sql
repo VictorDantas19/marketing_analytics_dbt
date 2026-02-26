@@ -29,6 +29,14 @@ with
         from cast_and_rename_columns
     )
 
+    , add_transaction_date as (
+        select
+            *
+            , date(transaction_timestamp) as transaction_date
+            , date_trunc(date(transaction_timestamp), month) as transaction_month
+        from add_campaign_organic
+    )
+
     , flag_valid_revenue as (
         select
             *
@@ -39,7 +47,7 @@ with
                     then true
                 else false
             end as is_valid_revenue
-        from add_campaign_organic
+        from add_transaction_date
     )
 
 select *
