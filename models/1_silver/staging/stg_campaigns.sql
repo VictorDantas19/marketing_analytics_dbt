@@ -16,7 +16,7 @@ with
             , true                                              as campaign_is_marketing_campaign
         from source_data
     )
-    
+
     , add_organic_campaign as (
         select *
         from cast_and_rename_columns
