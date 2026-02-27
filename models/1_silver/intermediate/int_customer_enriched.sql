@@ -35,7 +35,7 @@ with
             fp.customer_id
             , fp.first_purchase_date
             , date_trunc(fp.first_purchase_date, month) as cohort_month
-            , ac.acquisition_campaign_id
+            , ac.acquisition_campaign
         from first_purchase as fp
         left join acquisition as ac
             on fp.customer_id = ac.customer_id
