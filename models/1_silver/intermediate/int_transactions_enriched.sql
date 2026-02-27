@@ -15,7 +15,7 @@ with
             customer_id
             , first_purchase_date
             , cohort_month
-        from {{ ref('int_customer_first_purchase') }}
+        from {{ ref('int_customer_enriched') }}
     )
 
     , joins as (

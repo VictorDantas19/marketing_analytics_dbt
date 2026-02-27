@@ -25,7 +25,7 @@ models:
         tests:
           - not_null
   
-  - name: int_customer_first_purchase
+  - name: int_customer_enriched
     description: >
       "This model standardizes customer master data, including signup attributes, demographics, loyalty segmentation, and acquisition source. 
       It supports cohort analysis, customer segmentation, and marketing attribution."
