@@ -1,13 +1,12 @@
 with 
-    stg_transactions as (
+    int_valid_transaction as (
         select
             transaction_id
             , customer_id
             , transaction_date
             , product_id
             , net_revenue
-        from {{ ref('stg_transactions') }}
-        where is_valid_revenue = true
+        from {{ ref('int_valid_transaction') }}
     )
 
     , int_customer_first_purchase as (
@@ -20,14 +19,14 @@ with
 
     , joins as (
         select
-            st.transaction_id
-            , st.customer_id
-            , st.transaction_date
-            , st.product_id
-            , st.net_revenue
+            vt.transaction_id
+            , vt.customer_id
+            , vt.transaction_date
+            , vt.product_id
+            , vt.net_revenue
             , icfp.first_purchase_date
             , icfp.cohort_month
-        from stg_transactions as st
+        from int_valid_transaction as vt
         left join int_customer_first_purchase as icfp
             using (customer_id)
     )

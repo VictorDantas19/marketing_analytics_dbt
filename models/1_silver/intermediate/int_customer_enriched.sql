@@ -1,31 +1,30 @@
 with 
-    stg_transactions as (
+    int_valid_transaction as (
         select
             transaction_id
             , customer_id
             , transaction_date
             , transaction_timestamp
-        from {{ ref('stg_transactions') }}
-        where is_valid_revenue = true
+        from {{ ref('int_valid_transaction') }}
     )
 
     , first_purchase as (
         select
             customer_id
             , min(transaction_date) as first_purchase_date
-        from stg_transactions
+        from int_valid_transaction
         group by customer_id
     )
 
     , acquisition as (
         select
-            st.customer_id
+            vt.customer_id
             , c30.campaign_id_30d as acquisition_campaign
             , row_number() over (
-                partition by st.customer_id
-                order by st.transaction_timestamp asc
+                partition by vt.customer_id
+                order by vt.transaction_timestamp asc
             ) as rn_transaction
-        from stg_transactions as st
+        from int_valid_transaction as vt
         left join {{ ref('int_attribution_last_click_30d') }} as c30
             using (transaction_id)
     )
