@@ -43,11 +43,23 @@ with
             , e.cohort_month
             , e.days_since_first_purchase
             , e.is_new_customer_transaction
-            , coalesce(a.campaign_id, '(organic)') as campaign_id,
+            , coalesce(a.campaign_id, '(organic)') as campaign_id
         from int_valid_transaction as vt
         left join enriched as e using (transaction_id)
         left join attrib as a using (transaction_id)
     )
 
-select *
+select
+    transaction_id
+    , customer_id
+    , product_id
+    , date
+    , timestamp
+    , quantity
+    , net_revenue
+    , first_purchase_date
+    , cohort_month
+    , days_since_first_purchase
+    , is_new_customer_transaction
+    , campaign_id
 from joins_and_rename
