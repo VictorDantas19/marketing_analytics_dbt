@@ -11,9 +11,9 @@ with
         select
             event_date as date_day
             , campaign_id
+            , countif(event_type = 'view') as views
             , countif(event_type = 'click') as clicks
-            , countif(event_type = 'lead') as leads
-            , countif(event_type = 'conversion') as conversions
+            , countif(event_type = 'add_to_cart') as conversions
             , countif(event_type = 'purchase') as purchases
         from base
         group by 
@@ -21,5 +21,11 @@ with
             , campaign_id
     )
 
-select *
+select
+    date_day
+    , campaign_id
+    , views
+    , clicks
+    , conversions
+    , purchases
 from funnel
