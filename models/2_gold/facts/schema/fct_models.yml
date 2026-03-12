@@ -94,7 +94,6 @@ models:
                 to: ref('dim_date')
                 field: date_day
 
-
   - name: fact_funnel_daily
     description: >
       "This model standardizes customer master data, including signup attributes, demographics, loyalty segmentation, and acquisition source. 

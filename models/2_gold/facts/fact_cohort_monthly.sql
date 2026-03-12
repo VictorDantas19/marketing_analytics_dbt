@@ -41,19 +41,6 @@ with
             , m.transactions
             , m.revenue
             , safe_divide(m.active_customers, cs.cohort_customers) as retention_rate
-            , sum(m.revenue) over (
-                partition by m.cohort_month
-                order by m.months_since_first_purchase
-                rows between unbounded preceding and current row
-            ) as revenue_cumulative
-            , safe_divide(
-                sum(m.revenue) over (
-                    partition by m.cohort_month
-                    order by m.months_since_first_purchase
-                    rows between unbounded preceding and current row
-                ),
-                cs.cohort_customers
-            ) as ltv_avg_cumulative
         from monthly m
         left join cohort_size cs
             using (cohort_month)
@@ -62,11 +49,5 @@ with
 select 
     cohort_month
     , months_since_first_purchase
-    , cohort_customers
-    , active_customers
-    , transactions
-    , revenue
     , retention_rate
-    , revenue_cumulative
-    , ltv_avg_cumulative
 from final
