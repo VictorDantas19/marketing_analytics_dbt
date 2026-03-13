@@ -6,7 +6,7 @@ with
 
     , rename_columns as (
         select
-            product_id              as product_id
+            product_id
             , product_category      as category
             , product_brand         as brand
             , product_base_price    as base_price
@@ -15,5 +15,11 @@ with
         from stg_products
     )
 
-select *
+select
+    product_id
+    , category
+    , brand
+    , base_price
+    , launch_date
+    , is_premium
 from rename_columns

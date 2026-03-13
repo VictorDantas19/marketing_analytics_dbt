@@ -6,7 +6,7 @@ with
 
     , rename_columns as (
         select
-            campaign_id                         as campaign_id
+            campaign_id
             , campaign_channel                  as channel
             , campaign_objective                as objective
             , campaign_start_date               as start_date
@@ -17,5 +17,13 @@ with
         from stg_campaigns
     )
 
-select *
+select
+    campaign_id
+    , channel
+    , objective
+    , start_date
+    , end_date
+    , target_segment
+    , expected_uplift
+    , is_marketing_campaign
 from rename_columns

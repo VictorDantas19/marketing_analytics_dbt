@@ -23,5 +23,12 @@ with
             using (customer_id)
     )
 
-select *
+select
+    customer_id
+    , signup_date
+    , country
+    , age
+    , gender
+    , loyalty_tier
+    , acquisition_channel
 from join_int

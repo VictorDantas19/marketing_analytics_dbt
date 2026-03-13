@@ -18,5 +18,19 @@ with
         from {{ ref('stg_events') }}
     )
 
-select *
+select
+    event_id
+    , timestamp
+    , date
+    , customer_id
+    , session_id
+    , type
+    , product_id
+    , device_type
+    , traffic_source
+    , campaign_id
+    , is_paid_campaign
+    , page_category
+    , session_duration_sec
+    , experiment_group
 from events
